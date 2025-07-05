@@ -22,13 +22,31 @@ public class Main {
                 case 1:
                     System.out.println("Yemek Adı: ");
                     String ad = scanner.nextLine();
+
                     System.out.println("Kalori: ");
                     int kalori = scanner.nextInt();
-                    System.out.println("Fİyatı: ");
+
+                    System.out.println("Fiyatı: ");
                     double fiyat = scanner.nextDouble();
                     scanner.nextLine();
-                    manager.yemekEkle((new Food(ad, kalori, fiyat)));
+
+                    System.out.println("Kategoriyi seçin: ");
+                    Kategori[] kategoriler = Kategori.values();
+                    for(int i=0;i<kategoriler.length;i++){
+                        System.out.println((i+1) + "- " + kategoriler[i]);
+                    }
+                    System.out.println("Seçiminiz: ");
+                    int kategoriSecim= scanner.nextInt();
+                    scanner.nextLine();
+                    if (kategoriSecim < 1 || kategoriSecim > kategoriler.length) {
+                        System.out.println("Geçersiz kategori seçimi!");
+                        break;
+                    }
+                    Kategori secilenKategori = kategoriler[kategoriSecim - 1];
+                    Food yeniYemek = new Food(ad, kalori, fiyat, secilenKategori);
+                    manager.yemekEkle(yeniYemek);
                     break;
+
                 case 2:
                     manager.yemekleriListele();
                     ;
